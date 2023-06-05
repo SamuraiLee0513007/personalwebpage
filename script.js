@@ -1,27 +1,20 @@
-function addRecommendation() {
-  // Get the message of the new recommendation
-  let recommendation = document.getElementById("new_recommendation");
-  // If the user has left a recommendation, display a pop-up
-  if (recommendation.value != null && recommendation.value.trim() != "") {
-    console.log("New recommendation added");
-    //Call showPopup here
-    showPopup(true);
-    
-    // Create a new 'recommendation' element and set it's value to the user's message
-    var element = document.createElement("div");
-    element.setAttribute("class","recommendation");
-    element.innerHTML = "\<span\>&#8220;\</span\>" + recommendation.value + "\<span\>&#8221;\</span\>";
-    // Add this element to the end of the list of recommendations
-    document.getElementById("all_recommendations").appendChild(element); 
-    // Reset the value of the textarea
-    recommendation.value = "";
-  }
-}
-
-function showPopup(bool) {
-  if (bool) {
-    document.getElementById('popup').style.visibility = 'visible'
-  } else {
-    document.getElementById('popup').style.visibility = 'hidden'
-  }
-}
+var express = require('express');
+var fs = require('fs'); 
+var app = express();
+app.use(express.json());
+// For parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended:  false  }));
+app.use('/html_finalprojimages', express.static(__dirname + '/html_finalprojimages'));
+app.get('/', function(req, res) {
+    res.sendFile('/index.html', {root: __dirname })
+});
+app.listen(3000);
+app.post("/recommendation",express.json(),function(req,res){
+    var name = req.body.new_recommendation;
+    fs.appendFile(__dirname+"/index.html",name+'\n', (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+      res.sendFile('/index.html', {root: __dirname })
+});

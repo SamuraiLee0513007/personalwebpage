@@ -3,7 +3,15 @@
   <head>
     <title>Ivan Lee - Portfolio</title>
     <link rel="stylesheet" href="./style.css"/>
-    <script src="./script.js"></script>
+    <script>
+        function showPopup(bool) {
+  if (bool) {
+    document.getElementById('popup').style.visibility = 'visible'
+  } else {
+    document.getElementById('popup').style.visibility = 'hidden'
+    }
+   }
+    </script>
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -160,18 +168,19 @@
     </section>
 
     <!-- Recommendation Form -->
-    <section id="contact">
+    <form action="/recommendation/" method="post">
       <div class="flex_center">
         <fieldset>
           <legend class="introduction">Leave a Recommendation</legend>          
           <input type="text" placeholder="Name (Optional)"> <br/>
-          <textarea id="new_recommendation" cols="500" rows="10" placeholder="Message"></textarea>
+          <input id="new_recommendation" type="text" name="new_recommendation" cols="500" rows="10" placeholder="Message"></input>
           <div class="flex_center">
-            <button id="recommend_btn" onclick="addRecommendation()">Submit</button>
+            <input type="submit" value="Submit">
+            <a href="/">Reload</a>
           </div>
         </fieldset>
       </div>
-    </section>
+    </form>
 
     <div class="iconbutton">
       <a href="#home">
