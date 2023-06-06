@@ -45,47 +45,31 @@ app.post("/recommendation",express.json(),function(req,res){
            console.log(err);}  
        });  
     request.addParameter('recommendation', TYPES.NVarChar,name);   
-    connection.execSql(request); 
-    request.on('row', function(columns) {  
-             columns.forEach(function(column) {  
-             if (column.value === null) {  
-               console.log('NULL');  
-             } else {  
-               console.log("Product id of inserted item is " + column.value);  
-             }  
-           });  
-       });
-       
+    connection.execSql(request);
     request.on("requestCompleted", function (rowCount, more) {
-        connection.close();
-    });
-    
-    res.render("index");
+        res.redirect('/'); 
+    }); 
 });
 app.get('/', function(req, res) {
+    var result = [];
     var request = new Request("SELECT * FROM recommendations;", function(err) {  
         if (err) {  
             console.log(err);}  
-        });  
-        var result = [];  
-        request.on('row', function(columns) {  
-            columns.forEach(function(column) {  
-              if (column.value === null) {  
-                console.log('NULL');  
-              } else {  
-                result.push(column.value);  
-              }  
-            });  
-            console.log(result[0]);  
+        });        
+        request.on('row', function(columns) { 
+            
+           columns.forEach(function(column) {  
+                result.push({
+                    recommendation: column.value
+                });
+               });
         });  
         request.on('done', function(rowCount, more) {  
             console.log(rowCount + ' rows returned');  
             });  
             connection.execSql(request); 
-            // Close the connection after the final event emitted by the request, after the callback passes
-            request.on("requestCompleted", function (rowCount, more) {
-                connection.close();
+        request.on("requestCompleted", function (rowCount, more) {
+            res.render("index", {userData : result});
             });
-            //console.log({userData : JSON.stringify(result)});
-            res.render("index", {userData : JSON.stringify(result)});
+
 });
