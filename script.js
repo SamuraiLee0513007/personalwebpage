@@ -24,13 +24,14 @@ var Connection = require('tedious').Connection;
         options: {
             // If you are on Microsoft Azure, you need encryption:
             encrypt: true,
-            database: 'db'  //update me
+            database: 'db',
+            port: 1433  //update me
         }
     };  
 
 var connection = new Connection(config);  
     connection.on('connect', function(err) {  
-        // If no error, then good to proceed.
+        if(err)
         console.log("Error");  
     });
     
@@ -66,16 +67,16 @@ app.get('/', function(req, res) {
         if (err) {  
             console.log(err);}  
         });  
-        var result = "";  
+        var result = [];  
         request.on('row', function(columns) {  
             columns.forEach(function(column) {  
               if (column.value === null) {  
                 console.log('NULL');  
               } else {  
-                result+= column.value + " ";  
+                result.push(column.value);  
               }  
             });  
-            console.log(result);  
+            console.log(result[0]);  
         });  
         request.on('done', function(rowCount, more) {  
             console.log(rowCount + ' rows returned');  
@@ -85,6 +86,6 @@ app.get('/', function(req, res) {
             request.on("requestCompleted", function (rowCount, more) {
                 connection.close();
             });
-            
-            res.render("index", {userData : result});
+            //console.log({userData : JSON.stringify(result)});
+            res.render("index", {userData : JSON.stringify(result)});
 });
