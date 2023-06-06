@@ -1,7 +1,5 @@
 var express = require('express');
-var fs = require('fs'); 
 var app = express();
-let ejs = require('ejs');
 app.set("view engine", "ejs");
 app.use(express.json());
 var path = require('path');
