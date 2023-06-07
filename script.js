@@ -39,8 +39,8 @@ app.listen(3000);
 app.post("/recommendation",express.json(),function(req,res){
     var name = req.body.new_recommendation;
     var request = new Request("INSERT INTO recommendations (recommendation) VALUES (@recommendation);", function(err) {  
-        if (err) {  
-           console.log(err);}  
+        if (err)   
+           console.log(err); 
        });  
     request.addParameter('recommendation', TYPES.NVarChar,name);   
     connection.execSql(request);
