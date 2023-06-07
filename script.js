@@ -51,21 +51,17 @@ app.post("/recommendation",express.json(),function(req,res){
 app.get('/', function(req, res) {
     var result = [];
     var request = new Request("SELECT * FROM recommendations;", function(err) {  
-        if (err) {  
-            console.log(err);}  
+        if (err)
+            console.log(err);  
         });        
-        request.on('row', function(columns) { 
-            
+        request.on('row', function(columns) {     
            columns.forEach(function(column) {  
                 result.push({
                     recommendation: column.value
                 });
                });
         });  
-        request.on('done', function(rowCount, more) {  
-            console.log(rowCount + ' rows returned');  
-            });  
-            connection.execSql(request); 
+        connection.execSql(request); 
         request.on("requestCompleted", function (rowCount, more) {
             res.render("index", {userData : result});
             });
