@@ -153,8 +153,8 @@
             <td><%=result.recommendation %></td>
             <td><a href="/delete/<%=result.recommendation%>">Delete</a></td>
            <td> <form action="/edit" method="post">
-                <td><input type="text" id="recommendation" name="recommendation"value="<%=result.recommendation%>" readonly></input>
-                <td><input type="text" id="updatenew_recommendation" name="updatenew_recommendation"></input></td>
+                <input type="hidden" id="recommendation" name="recommendation"value="<%=result.recommendation%>"></input>
+                <input type="text" id="updatenew_recommendation" name="updatenew_recommendation"></input>
                 <td><input type="submit" value="Update"></input></td>  
             </form></td>
         </tr>
