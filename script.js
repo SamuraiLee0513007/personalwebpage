@@ -79,3 +79,17 @@ app.get("/delete/:recommendation",express.json(),function(req,res){
         res.redirect('/'); 
     }); 
 });
+app.post("/edit",express.json(),function(req,res){
+    var name = req.body.recommendation;
+    var dname = req.body.updatenew_recommendation;
+    var request = new Request("UPDATE recommendations SET recommendation = @new_recommendation WHERE recommendation = @recommendation;", function(err) {  
+        if (err)   
+           console.log(err); 
+       });  
+    request.addParameter('recommendation', TYPES.NVarChar,name);
+    request.addParameter('new_recommendation', TYPES.NVarChar,dname);
+    connection.execSql(request);
+    request.on("requestCompleted", function (rowCount, more) {
+        res.redirect('/'); 
+    }); 
+});

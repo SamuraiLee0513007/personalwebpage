@@ -152,6 +152,11 @@
             <td><%=i; %></td>
             <td><%=result.recommendation %></td>
             <td><a href="/delete/<%=result.recommendation%>">Delete</a></td>
+           <td> <form action="/edit" method="post">
+                <td><input type="text" id="recommendation" name="recommendation"value="<%=result.recommendation%>" readonly></input>
+                <td><input type="text" id="updatenew_recommendation" name="updatenew_recommendation"></input></td>
+                <td><input type="submit" value="Update"></input></td>  
+            </form></td>
         </tr>
         <%  i++; }) %>
         <% } else{ %>
@@ -175,7 +180,6 @@
         </fieldset>
       </div>
     </form>
-
     <div class="iconbutton">
       <a href="#home">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" width="63px">
