@@ -118,6 +118,7 @@
             <h3>Java COVID related csv data querying project</h3>
             <ul>
               <li>Developed a system for querying and visualizing covid related data from given csv dataset</li>
+              <a href="https://github.com/SamuraiLee0513007/T28-Project-COMP3111.git">COVID project</a>
             </ul>
           </div>
           <hr>
@@ -125,12 +126,14 @@
             <h3>IBM Watson translator project</h3>
             <ul>
               <li>Created an webapp by utilizing IBM Watson translator's functionality and deployed to AWS, GCP and Microsoft Azure</li>
+              <a href="https://github.com/SamuraiLee0513007/IBM_Watson.git">IBM translator</a>
             </ul>
           </div>
           <div class="project-card">
-            <h3>SFML music and picture player</h3>
+            <h3>Django App</h3>
             <ul>
-              <li>Created an C++ application for playing music songs and automatically changing picture that are showing on screen by using SFML and dirent</li>
+              <li>Created a Django application for creating hypethetical multiple choices quizzes to let student answer</li>
+              <a href="https://github.com/SamuraiLee0513007/final-cloud-app-with-database.git">Django final Exam system</a>
             </ul>
           </div>
     </div>
@@ -142,6 +145,8 @@
         <tr>
             <th>S.N</th>
             <th>Recommendation</th>
+            <th>Delete</th>
+            <th>Edit</th>
         </tr>
         <%
         if(userData.length!=0){
@@ -152,7 +157,7 @@
             <td><%=i; %></td>
             <td><%=result.recommendation %></td>
             <td><a href="/delete/<%=result.recommendation%>">Delete</a></td>
-           <td> <form action="/edit" method="post">
+           <td><form action="/edit" method="post">
                 <input type="hidden" id="recommendation" name="recommendation"value="<%=result.recommendation%>"></input>
                 <input type="text" id="updatenew_recommendation" name="updatenew_recommendation"></input>
                 <td><input type="submit" value="Update"></input></td>  
