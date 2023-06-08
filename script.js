@@ -67,3 +67,15 @@ app.get('/', function(req, res) {
             });
 
 });
+app.get("/delete/:recommendation",express.json(),function(req,res){
+    var name = req.params.recommendation;
+    var request = new Request("DELETE FROM recommendations WHERE recommendation=@recommendation;", function(err) {  
+        if (err)   
+           console.log(err); 
+       });  
+    request.addParameter('recommendation', TYPES.NVarChar,name);   
+    connection.execSql(request);
+    request.on("requestCompleted", function (rowCount, more) {
+        res.redirect('/'); 
+    }); 
+});
